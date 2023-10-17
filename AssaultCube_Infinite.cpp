@@ -8,6 +8,8 @@
 
 using namespace std;
 
+DWORD baseAddress = 0x0017E0A8;
+
 DWORD GetModuleBaseAddress(TCHAR* lpszModuleName, DWORD pID) {
     DWORD dwModuleBaseAddress = 0;
     HANDLE hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, pID); // make snapshot of all modules within process
@@ -48,9 +50,8 @@ DWORD GetPointerAddress(HWND hwnd, DWORD gameBaseAddr, DWORD address, vector<DWO
     return pointeraddress += offsets.at(offsets.size() - 1); // adding the last offset
 }
 
-int main() 
+int main()
 {
-
     HWND hwnd_AC = FindWindowA(NULL, "AssaultCube"); // 윈도우 핸들 가져오기
 
     if (hwnd_AC != FALSE);
@@ -64,29 +65,50 @@ int main()
     DWORD gamebaseaddress1 = GetModuleBaseAddress(_T(gamemodule1), pID); // 모듈, 베이스 주소 가져오기
 
     // name 베이스 주소, 오프셋
-    DWORD usernameAddr = 0x0017E0A8; //베이스 주소 입력
     vector<DWORD> usernameOffsets{ 0x33C, 0x14, 0xDD }; // 오프셋 주소 입력
-    DWORD usernamePtrAddr = GetPointerAddress(hwnd_AC, gamebaseaddress1, usernameAddr, usernameOffsets);
+    DWORD usernamePtrAddr = GetPointerAddress(hwnd_AC, gamebaseaddress1, baseAddress, usernameOffsets);
 
     // Health 베이스 주소, 오프셋
-    DWORD HealthAddr = 0x0017E0A8; //베이스 주소 입력
     vector<DWORD> HealthOffsets{ 0xEC }; // 오프셋 주소 입력
-    DWORD HealthPtrAddr = GetPointerAddress(hwnd_AC, gamebaseaddress1, HealthAddr, HealthOffsets);
+    DWORD HealthPtrAddr = GetPointerAddress(hwnd_AC, gamebaseaddress1, baseAddress, HealthOffsets);
 
     // ammo 베이스 주소, 오프셋
-    DWORD ammoAddr = 0x0017E0A8; //베이스 주소 입력
     vector<DWORD> ammoOffsets{ 0X35C, 0X18, 0X200, 0X14, 0X0 }; // 오프셋 주소 입력
-    DWORD ammoPtrAddr = GetPointerAddress(hwnd_AC, gamebaseaddress1, ammoAddr, ammoOffsets);
+    DWORD ammoPtrAddr = GetPointerAddress(hwnd_AC, gamebaseaddress1, baseAddress, ammoOffsets);
 
     // 방탄복 bt 베이스 주소, 오프셋
-    DWORD btAddr = 0x0017E0A8; //베이스 주소 입력
     vector<DWORD> btOffsets{ 0Xf0 }; // 오프셋 주소 입력
-    DWORD btPtrAddr = GetPointerAddress(hwnd_AC, gamebaseaddress1, btAddr, btOffsets);
+    DWORD btPtrAddr = GetPointerAddress(hwnd_AC, gamebaseaddress1, baseAddress, btOffsets);
 
     // Grenade 베이스 주소, 오프셋
-    DWORD GrenadeAddr = 0x0017E0A8; //베이스 주소 입력
     vector<DWORD> GrenadeOffsets{ 0X144 }; // 오프셋 주소 입력
-    DWORD GrenadePtrAddr = GetPointerAddress(hwnd_AC, gamebaseaddress1, GrenadeAddr, GrenadeOffsets);
+    DWORD GrenadePtrAddr = GetPointerAddress(hwnd_AC, gamebaseaddress1, baseAddress, GrenadeOffsets);
+
+
+    // x 베이스 주소, 오프셋
+    //vector<DWORD> xOffsets{ 0X28 }; // 오프셋 주소 입력
+    //DWORD xPtrAddr = GetPointerAddress(hwnd_AC, gamebaseaddress1, baseAddress, xOffsets);
+
+    // z 베이스 주소, 오프셋
+    //vector<DWORD> zOffsets{ 0X2C }; // 오프셋 주소 입력
+    //DWORD zPtrAddr = GetPointerAddress(hwnd_AC, gamebaseaddress1, baseAddress, zOffsets);
+
+    // y 베이스 주소, 오프셋
+    //vector<DWORD> yOffsets{ 0X30 }; // 오프셋 주소 입력
+    //DWORD yPtrAddr = GetPointerAddress(hwnd_AC, gamebaseaddress1, baseAddress, yOffsets);
+
+    //float x; // 수류탄
+    //ReadProcessMemory(phandle, (LPCVOID)xPtrAddr, &x, sizeof(int), NULL);
+    //cout << x << endl;
+
+    //float z; // 수류탄
+    //ReadProcessMemory(phandle, (LPCVOID)zPtrAddr, &z, sizeof(int), NULL);
+    //cout << z << endl;;
+
+    //float y; // 수류탄
+    //ReadProcessMemory(phandle, (LPCVOID)yPtrAddr, &y, sizeof(int), NULL);
+    //cout << y << endl;
+
 
     // 메모리 쓰기
     while (true)
