@@ -73,7 +73,7 @@ int main()
     DWORD HealthPtrAddr = GetPointerAddress(hwnd_AC, gamebaseaddress1, baseAddress, HealthOffsets);
 
     // ammo 베이스 주소, 오프셋
-    vector<DWORD> ammoOffsets{ 0X35C, 0X18, 0X200, 0X14, 0X0 }; // 오프셋 주소 입력
+    vector<DWORD> ammoOffsets{ 0X140 }; // 오프셋 주소 입력
     DWORD ammoPtrAddr = GetPointerAddress(hwnd_AC, gamebaseaddress1, baseAddress, ammoOffsets);
 
     // 방탄복 bt 베이스 주소, 오프셋
