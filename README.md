@@ -1,5 +1,5 @@
 # AssaultCube_Cheat
-게임 치 연습을 위해 만들어진 저장소
+게임 치트 연습을 위해 만들어진 저장소
 "ac_client.exe"+0017E0A8 =   
   
 X 축 28  
