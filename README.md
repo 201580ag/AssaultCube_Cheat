@@ -8,3 +8,4 @@ Y 축 30
   
 34 X 축 시점  
 38 Y 축 시점  
+https://youtu.be/sP7RUtyYjCY
