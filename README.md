@@ -5,6 +5,32 @@
 `AssaultCube_v1.2.0.2` `AssaultCube_v1.3.0.2_LockdownEdition` 버전의 코드가 같이 있습니다.
 
 AssaultCube_v1.3.0.2_LockdownEdition 버전 오프셋
+탄약 무제한
+```lua
+[ENABLE]
+
+alloc(newmem, 2048)
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem:
+
+originalcode:
+nop
+lea eax,[esp+1C]
+
+exit:
+jmp returnhere
+
+"ac_client.exe"+C73EF:
+jmp newmem
+nop
+returnhere:
+
+[DISABLE]
+
+```
 ```
 "ac_client.exe"+0017E0A8 =   
 X 축 28  
